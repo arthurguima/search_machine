@@ -1,0 +1,11 @@
+h1. Máquina de Busca
+
+* *Autor:* Arthur Henrique Guimarães
+* *Desde:* 01/09/2011
+* *Professor Orientador:* Thierson Couto Rosa
+
+h2. Descrição
+
+Projeto final da disciplina de Recuperação de Informação da turma de Ciências da Computação de Universidade Federal de Goiás.
+Possui como objetivo a criação de uma máquina de busca que implemente parte dos conceitos vistos em sala de aula.
+

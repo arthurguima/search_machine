@@ -12,12 +12,12 @@ puts "#{h["a"][2]}\n"
 
 puts "A e B\n"
 
-result = Array.new
+#result = Array.new
 
 if h["a"].first > h["b"].last
     puts "Nao existem documentos em comum"
 else
-   puts result = h["a"] & h["b"]           
+   puts h["a"] & h["b"]           
 end   
 
 #puts "#{result.each do |r| puts r.to_s end}\n"
@@ -30,7 +30,7 @@ result = Array.new
 if h["b"].first > h["c"].last
     puts "Nao existem documentos em comum"
 else
-    puts result = h["b"] | h["c"]        
+    puts h["b"] | h["c"]        
 end   
 
 #puts "#{result.each do |r| puts r.to_s end}\n"

@@ -6,11 +6,10 @@ class Parser_receiver
 		if File.exist?(file)
       @list = File.open(file)
     end
+    @hash_table = Hash.new
 	end
 
     def init_hash
-        @hash_table = Hash.new
-
         @list.each_line do |i|
             aux = i.split(' ')
             # indice -> [quantidade, [posição,documento], [posição, documento], ...]
@@ -18,8 +17,8 @@ class Parser_receiver
               @hash_table[aux.first] = [[aux[1].to_i,aux[2].to_i]]
               @hash_table[aux.first].insert(0,1)
               #testes
-                puts "Entrada na tabela #{aux.first} => #{@hash_table[aux.first]}"
-                sleep 0.9
+                puts "Entrada na tabela #{aux.first} => #{@hash_table[aux.first]}\n"
+                #sleep 0.9
            else
               #testes
                 puts "entrou no else #{aux.first} ja inserido 1 vez"
@@ -27,7 +26,7 @@ class Parser_receiver
               @hash_table[aux.first][0] = @hash_table[aux.first][0] + 1
               
               #teste
-              puts "Tabela mudou para => #{@hash_table[aux.first]}"
+              puts "Tabela mudou para => #{@hash_table[aux.first]}\n"
 
            end     
         end
@@ -36,13 +35,14 @@ class Parser_receiver
 end
 
 def main
-  
+  a = Time.now
   hash_table = Parser_receiver.new("entrada.txt").init_hash
   
   #testes
     puts "Tabela de indices criada com sucesso!"
-    puts "Search \"the\" #{hash_table["the"][1]}"
-
+    puts "Search \"THE\" #{hash_table["THE"][1]}"
+  b =  Time.now
+  tempo = (b.sec-a.sec)/60  
 end
 
 main()

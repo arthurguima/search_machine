@@ -1,0 +1,2 @@
+1.  Melhorar estrutura da tabela Hash. Não utilizar várias posições para referenciar o mesmo arquivo.
+2.  Implementar entrada de dados para busca simples -> E e OU

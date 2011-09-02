@@ -1,2 +1,3 @@
-1.  Melhorar estrutura da tabela Hash. Não utilizar várias posições para referenciar o mesmo arquivo.
+1.  Melhorar estrutura da tabela Hash. Não utilizar várias posições para referenciar o mesmo Documento. Algo do tipo => hash_table["THE"]  :=> [1, [49,2,67,89,100], [7, 3,5,8,16]]
+[qtd, [doc,pos1,pos2,pos3], [doc2,pos1,pos2,pos3]]
 2.  Implementar entrada de dados para busca simples -> E e OU

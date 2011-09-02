@@ -17,16 +17,16 @@ class Parser_receiver
               @hash_table[aux.first] = [[aux[1].to_i,aux[2].to_i]]
               @hash_table[aux.first].insert(0,1)
               #testes
-                puts "Entrada na tabela #{aux.first} => #{@hash_table[aux.first]}\n"
+                #puts "Entrada na tabela #{aux.first} => #{@hash_table[aux.first]}\n"
                 #sleep 0.9
            else
               #testes
-                puts "entrou no else #{aux.first} ja inserido 1 vez"
+                #puts "entrou no else #{aux.first} ja inserido 1 vez"
               @hash_table[aux.first].push([aux[1].to_i, aux[2].to_i])
               @hash_table[aux.first][0] = @hash_table[aux.first][0] + 1
               
               #teste
-              puts "Tabela mudou para => #{@hash_table[aux.first]}\n"
+              #puts "Tabela mudou para => #{@hash_table[aux.first]}\n"
 
            end     
         end
@@ -40,9 +40,11 @@ def main
   
   #testes
     puts "Tabela de indices criada com sucesso!"
-    puts "Search \"THE\" #{hash_table["THE"][1]}"
+    puts "Search \"HANDSOME\" #{hash_table["HANDSOME"]}"
+    puts "Search \"VICTORY\" #{hash_table["VICTORY"]}"
+    puts "Search \"MACHINE\" #{hash_table["MACHINE"]}"
   b =  Time.now
-  tempo = (b.sec-a.sec)/60  
+  puts  "Tempo = #{b - a} segundos."  
 end
 
 main()

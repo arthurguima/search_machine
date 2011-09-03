@@ -12,9 +12,9 @@ class Parser_receiver
     def init_hash
         @list.each_line do |i|
             aux = i.split(' ')
-            # indice -> [quantidade, [posição,documento], [posição, documento], ...]
+            # hash[termo] = [qtd, hash[documento]]; hash[documento] = [posição1, posição2...]
            if @hash_table.has_key?(aux.first) == false 
-              @hash_table[aux.first] = [[aux[1].to_i,aux[2].to_i]]
+              @hash_table[aux.first] = [ Hash[aux[2].to_i , [aux[1].to_i]]]
               @hash_table[aux.first].insert(0,1)
               #testes
                 #puts "Entrada na tabela #{aux.first} => #{@hash_table[aux.first]}\n"
@@ -22,7 +22,7 @@ class Parser_receiver
            else
               #testes
                 #puts "entrou no else #{aux.first} ja inserido 1 vez"
-              @hash_table[aux.first].push([aux[1].to_i, aux[2].to_i])
+              @hash_table[aux.first][1].has_key?(aux[2].to_i) ? @hash_table[aux.first][1][aux[2].to_i].push(aux[1.to_i]) : @hash_table[aux.first][1][aux[2].to_i] = [aux[1].to_i]
               @hash_table[aux.first][0] = @hash_table[aux.first][0] + 1
               
               #teste
@@ -47,4 +47,6 @@ def main
   puts  "Tempo = #{b - a} segundos."  
 end
 
-main()
+require 'benchmark'
+
+puts Benchmark.measure {main()}

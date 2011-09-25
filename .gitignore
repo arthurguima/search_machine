@@ -1,5 +1,6 @@
 # Arquivos de entrada para testes
-time/
+colecoes/
 
 #Outros 
 .rb.swp
+.tar.gz

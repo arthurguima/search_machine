@@ -6,11 +6,11 @@ class Data_index
     if File.exist?(file)
       @list = File.open(file)	
       puts "Encontrado arquivo #{file}"
+      @hash_table = Hash.new
     else
       puts "Arquivo #{file} nao encontrado"
       exit
     end
-   @hash_table = Hash.new
 	end
 
 

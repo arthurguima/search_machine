@@ -1,6 +1,6 @@
 require 'benchmark'
 require_relative 'data_index'
-require_relarive 'consulta'
+require_relative 'consulta'
 
 def scanner(msg)
   puts msg

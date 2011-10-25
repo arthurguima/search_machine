@@ -30,12 +30,12 @@ class Data_index
       
        unless @hash_table.has_key?(out_parser[termo]) #Se o termo ainda não existe no indice
             
-         # Adiciona o termo ao hash; Valor = novo Hash[docID] = [[parte,pos] ...]
+         # Adiciona o termo ao hash; Valor = novo Hash[docID] = [[pos,parte] ...]
          # Hash[termo] = (Hash[docId] = [[ p,pos]])
-         @hash_table[out_parser[termo]] = [ Hash[out_parser[docid].to_i, [ [out_parser[parte].to_s, out_parser[pos].to_i]] ]]
+         @hash_table[out_parser[termo]] = [ Hash[ out_parser[docid].to_i, [ [out_parser[pos].to_i, out_parser[parte].to_s]] ] ]
            
          @hash_table[out_parser[termo] ].insert(0,1) # Inicia o contador do termo
-         @hash_table[out_parser[termo]][1][out_parser[docid].to_i].insert(0,1) # Inicia o contador do termo do documento 
+         @hash_table[out_parser[termo]][1][out_parser[docid].to_i].insert(0,[1]) # Inicia o contador do termo do documento 
 
 
        else # Quando já esta no indice
@@ -43,15 +43,15 @@ class Data_index
          # Verifica se o documento já está no hash
            if @hash_table[out_parser[termo]][1].has_key?(out_parser[docid].to_i) 
               # Se o documento existe Adiciona o vetor [p,pos] no hash
-              @hash_table[out_parser[termo]][1][out_parser[docid].to_i].push([out_parser[parte].to_s, out_parser[pos].to_i])
+              @hash_table[out_parser[termo]][1][out_parser[docid].to_i].push([out_parser[pos].to_i, out_parser[parte].to_s])
               # Aumenta o contador do termo no documento                    
-              @hash_table[out_parser[termo]][1][out_parser[docid].to_i][0] = 
-                @hash_table[out_parser[termo]][1][out_parser[docid].to_i][0] +1 
+              @hash_table[out_parser[termo]][1][out_parser[docid].to_i][0][0] = 
+                @hash_table[out_parser[termo]][1][out_parser[docid].to_i][0][0] +1 
            else       
                  # Caso contrário cria o novo documento com o vetor [p,pos]
-                 @hash_table[out_parser[termo]][1][out_parser[docid].to_i] = [ [out_parser[parte].to_s, out_parser[pos].to_i] ]
+                 @hash_table[out_parser[termo]][1][out_parser[docid].to_i] = [ [out_parser[pos].to_i, out_parser[parte].to_s] ]
                  # Cria o contador do termo no documento  
-                 @hash_table[out_parser[termo]][1][out_parser[docid].to_i].insert(0,1) 
+                 @hash_table[out_parser[termo]][1][out_parser[docid].to_i].insert(0,[1]) 
            end
          # Aumenta o contador do termo na colecao
            @hash_table[out_parser[termo]][0] = @hash_table[out_parser[termo]][0] + 1 

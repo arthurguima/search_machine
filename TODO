@@ -1,3 +1,5 @@
+1. As consultas formadas por conjunto de termos, sem conectivos entre eles, devem ser processadas utilizando-se o metodo dos cossenos. As consultas com conetivos l ́gicos devem ser tratadas como consultas l ́gicas. Finalmente, uma consulta formada por um conjunto de termos entre aspas deve ser tratada como uma consulta por frase.
+
 2.  Implementar entrada de dados para busca simples -> E e OU
 
 4. Processamento de ordenação pelo metodo dos cossenos.

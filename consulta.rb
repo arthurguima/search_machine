@@ -1,6 +1,7 @@
 class Consulta
 
-  def initialize (index)
+  def initialize (index, qtd_docs)
+    @qtd_docs = qtd_docs
     @index = index
   end
 
@@ -24,7 +25,7 @@ class Consulta
 
     private
     def cosin_search(consulta)
-        total_documents = @index.size
+        total_documents = @qtd_docs
         score = Hash.new
         resultado = Array.new
         
@@ -34,14 +35,16 @@ class Consulta
             # tf -idf
             # tf = Hash[termo][1]Hash[doc][0] -> frequencia do termo no documento
             # idf = total de documentos/total de documentos que contem o termo
-            tf_minus_idf = @index[term][1][doc][0] 
-            tf_minus_idf = tf_minus_idf[0].to_i - total_documents/@index[term][1].size.to_f
+           if @index.has_key?(term)
+             tf_minus_idf = @index[term][1][doc][0] 
+             tf_minus_idf = tf_minus_idf[0].to_i * total_documents/@index[term][1].size.to_f
 
             if score.has_key?(doc)
               score[doc] = score[doc] + tf_minus_idf
             else
               score[doc] = tf_minus_idf
             end
+           end
           end
         end
 

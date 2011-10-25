@@ -1,6 +1,6 @@
 # Trabalha com a construção da tabela hash a partir dos arquivos criados pelo parser
 class Data_index
-	attr_accessor :list, :hash_table
+	attr_accessor :list, :hash_table, :qtd_docs
 
 	def initialize(file) 
     if File.exist?(file)
@@ -13,6 +13,9 @@ class Data_index
     end
 	end
 
+  def get_total_docs
+    return @qtd_docs.size
+  end
 
    # Inicia o Hash a partir do arquivo de entrada file
    # Retorna o indice invertido; Tipo: Hash
@@ -24,10 +27,14 @@ class Data_index
       pos = 2
       docid = 3
 
+       @qtd_docs = Hash.new()
+
       @list.each_line do |i|
         
        out_parser = i.split(' ') #
-      
+
+        @qtd_docs[docid] = 0
+                
        unless @hash_table.has_key?(out_parser[termo]) #Se o termo ainda não existe no indice
             
          # Adiciona o termo ao hash; Valor = novo Hash[docID] = [[pos,parte] ...]

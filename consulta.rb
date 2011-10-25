@@ -16,17 +16,40 @@ class Consulta
        if @consulta[0].start_with?('#')
           return logical_search(@consulta)
        else
-          return get_docs(@consulta[0]) #cosin_search(@consulta)
+          return cosin_search(@consulta)
         end
       end
   end
 
 
     private
-    def manage_search(consulta)
+    def cosin_search(consulta)
+        total_documents = @index.size
+        score = Hash.new
+
+        #Calcula Score = somatório de tf-idf para cada termo na consulta
+        consulta.each do |term|
+          get_docs(x).each do |doc| 
+            # tf -idf
+            # tf = Hash[termo][1]Hash[doc][0] -> frequencia do termo no documento
+            # idf = total de documentos/total de documentos que contem o termo
+            tf_minus_idf = (@index[1][term][1][doc][0] - total_documents/@index[1][term][1].size)
+
+            if score.has_key?(doc)
+              score[doc] = score[doc] + tf_minus_idf
+            else
+              score.push(doc,tf_minus_idf) 
+            end
+          end
+        end
+        
+        return score.to_a
+
     end
 
-    def logical_search(consulta)
+    
+
+    def simple_logical_search(consulta)
         if consulta[0].start_with?("#or")
            get_logical_docs( normalize(consulta[1]), normalize(consulta[2]), '&&')
         else

@@ -11,7 +11,17 @@ h2. Descrição
 Projeto final da disciplina de Recuperação de Informação da turma de Ciências da Computação de Universidade Federal de Goiás.
 Possui como objetivo a criação de uma máquina de busca que implemente parte dos conceitos vistos em sala de aula.
 
+h2. Como baixar obter o projeto
+
+O projeto foi versionado utilizando o git diponibilizado pelo: https://github.com/
+Para fazer o dowload  basta fazer o clone do projeto [0] ou obtelo através da url: https://github.com/arthurguima/search_machine
+
+[0] $ git clone git@github.com:arthurguima/search_machine.git
+
+
 h2. Sistema
 
 * *Requisitos:* ruby 1.9.2
 * *Testado:* Apenas em GNU/Linux.
+
+h2. Como Utilizar

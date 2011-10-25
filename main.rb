@@ -1,6 +1,6 @@
 require 'benchmark'
-require_relative 'data_index'
-require_relative 'consulta'
+require_relative 'class/data_index'
+require_relative 'class/consulta'
 
 def scanner(msg)
   puts msg
@@ -27,7 +27,12 @@ def main()
   consulta = scanner("Digite a consulta a ser realizada:")
 
   while(consulta != "000")
-    puts "Busca por \"#{consulta}\" retornou:\n #{Consulta.new(@index,qtd_docs).search(consulta)}\n" 
+    puts "Busca por \"#{consulta}\" retornou:\n"
+    
+    Consulta.new(@index,qtd_docs).search(consulta).each do |out|
+      puts "Doc: #{out[1]} Score: #{out[0]}"
+    end
+     
     consulta = scanner("\nDigite a consulta a ser realizada:")
   end
 

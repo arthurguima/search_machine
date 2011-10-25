@@ -37,7 +37,10 @@ class Consulta
             # idf = total de documentos/total de documentos que contem o termo
            if @index.has_key?(term)
              tf_minus_idf = @index[term][1][doc][0] 
-             tf_minus_idf = tf_minus_idf[0].to_i * total_documents/@index[term][1].size.to_f
+             #puts tf_minus_idf
+             tf_minus_idf = tf_minus_idf[0].to_i * (total_documents/@index[term][1].size.to_f).round(10)
+             #puts total_documents/@index[term][1].size.to_f
+             #puts tf_minus_idf              
 
             if score.has_key?(doc)
               score[doc] = score[doc] + tf_minus_idf
@@ -50,9 +53,9 @@ class Consulta
 
         score = score.to_a #transforma em um array
         score.each{ |x| x.reverse!} #inverte cada array individual para usar o sort
-        score.sort!.reverse!.each{ |a,b| resultado.push(b) }
+        score = score.sort!.reverse!.to_a #.each{ |a,b| resultado.push(b) }
         
-        return resultado
+        return score #resultado
 
     end
 

@@ -19,7 +19,7 @@ def main()
 
   consulta = scanner("Digite a consulta a ser realizada:")
 
-  while(consulta != "000") 
+  while(consulta != "000")
     puts "Busca por \"#{consulta}\" retornou:\n #{Consulta.new(@index).search(consulta)}\n" 
     consulta = scanner("\nDigite a consulta a ser realizada:")
   end

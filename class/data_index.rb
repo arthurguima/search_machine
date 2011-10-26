@@ -27,7 +27,7 @@ class Data_index
       pos = 2
       docid = 3
 
-       @qtd_docs = Hash.new()
+      @qtd_docs = Hash.new()
 
       @list.each_line do |i|
         

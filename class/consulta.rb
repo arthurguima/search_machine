@@ -7,19 +7,9 @@ class Consulta
 
   def search (consulta)
      @consulta = consulta.split(' ')
-    
-     #
-     #
-     #
-     if @consulta[0].start_with?("\"")
-       return sentence_search(@consulta)
-     else
-       if @consulta[0].start_with?('#')
-          return simple_logical_search(@consulta)
-       else
-          return cosin_search(@consulta)
-        end
-      end
+     return sentence_search(@consulta).each{ |doc| p doc } if @consulta[0].start_with?("\"")
+     return simple_logical_search(@consulta).each{ |doc| p doc} if @consulta[0].start_with?('#')
+     return cosin_search(@consulta)[0,10].each{ |out| p "Doc: #{out[1]} Score: #{out[0]}"}
   end
 
 
@@ -62,30 +52,19 @@ class Consulta
     
 
     def simple_logical_search(consulta)
-        if consulta[0].start_with?("#or")
-           get_logical_docs( normalize(consulta[1]), normalize(consulta[2]), '||')
-        else
-           if consulta[0].start_with?("#and")
-              get_logical_docs( normalize(consulta[1]), normalize(consulta[2]), '&&')
-           end
-        end
+      return get_logical_docs( normalize(consulta[1]), normalize(consulta[2]), '||') if consulta[0].start_with?("#or")
+      return get_logical_docs( normalize(consulta[1]), normalize(consulta[2]), '&&') if consulta[0].start_with?("#and")
+      #TODO "NO"
     end
 
     def get_logical_docs(term1, term2, oper)
-      if oper == '&&'  
-        return (get_docs(term1) & get_docs(term2))
-      else
-        return (get_docs(term1) | get_docs(term2))
-      end
+      return (get_docs(term1) & get_docs(term2)) if oper == '&&'  
+      return (get_docs(term1) | get_docs(term2))
     end
 
     def get_docs(consulta)
       docs = Array.new
-      if @index.has_key?(consulta)
-      @index[consulta][1].each_key{ |x| docs.push(x)} 
-      else
-        docs.push("Nao foram encontrados resultados compativeis")
-      end
+      @index[consulta][1].each_key{ |x| docs.push(x)} if @index.has_key?(consulta)
       return docs
     end
 

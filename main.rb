@@ -14,28 +14,22 @@ def main()
   qtd_docs = 0
 
   #Cria o indice invertido
-  puts  "Tabela de indices criada com sucesso!\n" +
-        "Tempo gasto para criar o Indice: "       +
-        "#{Benchmark.realtime{
-            aux = Data_index.new(colecao.to_s);
-            @index = aux.init_hash;
-            qtd_docs = aux.get_total_docs
-            puts qtd_docs
-          }
+  puts  "Tabela de indices criada com sucesso!\nTempo gasto para criar o Indice: " +
+        "#{Benchmark.realtime{ 
+            index_values = Data_index.new(colecao.to_s);
+            @index = index_values.init_hash;
+            qtd_docs = index_values.get_total_docs }
         }\n"
+  realiza_consulta(@index,qtd_docs)  
+ end
 
-  consulta = scanner("Digite a consulta a ser realizada:")
-
-  while(consulta != "000")
-    puts "Busca por \"#{consulta}\" retornou:\n"
-    
-    Consulta.new(@index,qtd_docs).search(consulta).each do |out|
-      puts "Doc: #{out[1]} Score: #{out[0]}"
-    end
-     
+def realiza_consulta(index,qtd_docs)
+  buscador = Consulta.new(@index,qtd_docs)
+  begin
     consulta = scanner("\nDigite a consulta a ser realizada:")
-  end
-
+    puts "Busca por \"#{consulta}\" retornou:\n"
+    buscador.search(consulta)
+  end while(consulta != "000")
 end
 
 main()

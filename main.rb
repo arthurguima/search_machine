@@ -9,7 +9,7 @@ end
 
 def main()
   
-  colecao = scanner("Qual a colecao sera utilizada?")
+  colecao = scanner("Qual a colecao que sera utilizada?")
   consulta =  nil
   qtd_docs = 0
 
@@ -26,6 +26,7 @@ def main()
 def realiza_consulta(index,qtd_docs)
   buscador = Consulta.new(@index,qtd_docs)
   begin
+    puts "Utilize 000 para sair do programa"
     consulta = scanner("\nDigite a consulta a ser realizada:")
     puts "Busca por \"#{consulta}\" retornou:\n"
     buscador.search(consulta)
